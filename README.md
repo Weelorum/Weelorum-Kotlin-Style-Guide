@@ -1,4 +1,4 @@
-# Mushket-Mobile-Kotlin-Style-Guide
+# Mushket Mobile Kotlin Style Guide
 
 You should also check out our other style guides:
 
