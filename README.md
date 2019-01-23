@@ -17,7 +17,7 @@ The language guidance is drawn from:
 
 It is possible to get Android Studio to adhere to these style guidelines, via a rather complex sequence of menus. To make it easier, we've provided a coding style that can be imported into Android Studio.
 
-The file can be found [here](https://koenig-media.raywenderlich.com/uploads/2018/03/rwstyle.xml_.zip).
+The file can be found in current GIT.
 
 To install the file, open Android Studio Settings and go to **Editor > Code Style > Kotlin**, then click the gear menu and choose **Import Scheme...**.
 
