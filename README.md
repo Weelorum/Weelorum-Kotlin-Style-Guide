@@ -1,10 +1,10 @@
-# Mushket Mobile Kotlin Style Guide
+# Weelorum Kotlin Style Guide
 
 You should also check out our other style guides too:
 
-* [Java](https://github.com/MushketMobile/Mushket-Mobile-Java-Style-Guide)
-* [Swift](https://github.com/MushketMobile/Mushket-Mobile-Swift-Style-Guide)
-* [Objective-C](https://github.com/MushketMobile/Mushket-Mobile-Objective-C-Style-Guide)
+* [Java](https://github.com/Weelorum/Weelorum-Java-Style-Guide)
+* [Swift](https://github.com/Weelorum/Weelorum-Swift-Style-Guide)
+* [Objective-C](https://github.com/Weelorum/Weelorum-Objective-C-Style-Guide)
 
 ## Inspiration
 
@@ -59,7 +59,7 @@ From now on, projects you create _should_ follow the correct style guidelines.
 * [Documentation](#documentation)
 * [Distribution](#distribution)
 * [Localization](#localization)
-* [About Mushket Mobile](#about-mushket-mobile)
+* [About Weelorum](#about-weelorum)
 
 
 
@@ -74,13 +74,13 @@ Package names are similar to Java: all __lower-case__, multiple words concatenat
 __BAD__:
 
 ```kotlin
-com.MushketMobile.name_project
+com.Weelorum.name_project
 ```
 
 __GOOD__:
 
 ```kotlin
-com.mushketmobile.nameproject
+com.weelorum.nameproject
 ```
 
 ### Classes & Interfaces
@@ -512,13 +512,13 @@ Make sure that you have folders for each language with `Localizable.strings` fil
 
 For right now there is no support for localizing from xibs directly, because we dont want to include meaningless strings into translation (like "Label" "Text" and etc.). 
 
-## About Mushket Mobile
+## About Weelorum
 
-[<img src="https://mushketmobile.com/wp-content/uploads/2018/11/logo.png" alt="mushketmobile.com">][mushketmobile]
+[<img src="https://www.weelorum.com/wp-content/uploads/2018/11/logo.png" alt="weelorum.com">][weelorum]
 
 We specialize in providing all-in-one solution in mobile and web development. Our team follows Lean principles and works according to agile methodologies to deliver the best results reducing the budget for development and its timeline. 
 
-Find out more [here][mushketmobile] and don't hesitate to [contact us][contact]!
+Find out more [here][weelorum] and don't hesitate to [contact us][contact]!
 
-[mushketmobile]: https://mushketmobile.com
-[contact]: https://mushketmobile.com
+[Weelorum]: https://www.weelorum.com
+[contact]: https://www.weelorum.com
