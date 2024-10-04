@@ -2,8 +2,8 @@
 
 You should also check out our other style guides too:
 
-* [Java](https://github.com/Weelorum/Weelorum-Java-Style-Guide)
 * [Swift](https://github.com/Weelorum/Weelorum-Swift-Style-Guide)
+* [Flutter](https://github.com/Weelorum/Weelorum-Swift-Style-GuideWeelorum-Flutter-Style-Guide)
 * [Objective-C](https://github.com/Weelorum/Weelorum-Objective-C-Style-Guide)
 
 ## Inspiration
@@ -41,6 +41,7 @@ From now on, projects you create _should_ follow the correct style guidelines.
   + [Classes](#classes)
   + [Data Type Objects](#data-type-objects)
   + [Enum Classes](#enum-classes)
+  + [Expressions](#expressions)
 - [Spacing](#spacing)
   + [Indentation](#indentation)
   + [Line Length](#line-length)
@@ -49,15 +50,19 @@ From now on, projects you create _should_ follow the correct style guidelines.
 - [Getters & Setters](#getters--setters)
 - [Brace Style](#brace-style)
 - [When Statements](#when-statements)
+- [Functions](#functions)
+  + [Named arguments](#named-arguments)
+  + [Functional type variables](#functional-type-variables)
+  + [Lambda Expressions Formatting](#lambda-expressions-formatting)
+  + [Composable functions](#composable-functions)
 - [Annotations](#annotations)
 - [Types](#types)
   + [Type Inference](#type-inference)
   + [Constants vs. Variables](#constants-vs-variables)
   + [Companion Objects](#companion-objects)
-  + [Optionals](#optionals)
-- [Language](#language)
-* [Documentation](#documentation)
-* [Distribution](#distribution)
+  + [Nullable type](#nullable-types)
+  + [Nullable boolean check](#nullable-boolean-check)
+- [Android Specific](#android-specific)
 * [Localization](#localization)
 * [About Weelorum](#about-weelorum)
 
@@ -118,6 +123,153 @@ companion object {
 Written in __lowerCamelCase__.
 
 Single character values must be avoided, except for temporary looping variables.
+
+When declaring constants, fields or function arguments, it is recommended to additionally specify the dimension if the context or name of the function does not provide an unambiguous understanding of their purpose:
+
+__BAD:__
+
+```kotlin
+const val TIMEOUT = 1000L
+const val PADDING = 24
+
+fun someFunction(timeout: Long)
+
+val defaultTimeout get() = 1000L
+```
+
+__GOOD:__
+
+```kotlin
+const val TIMEOUT_MILLIS = 1000L
+const val PADDING_DP = 24
+
+val TIMEOUT = 1000.milliseconds
+val PADDING = 24.dp
+
+fun preferGoodNames(timeoutMillis: Long)
+
+val defaultTimeoutMillis
+    get() = 1000L
+```
+
+### Functions
+
+### Named arguments
+
+If there is more than one argument in the function, it should be named. If the purpose of an argument is not clear from the context, it should be named also.
+
+```kotlin
+runOperation(
+    method = operation::run,
+    consumer,
+    errorHandler,
+    tag,
+    cacheSize = 3,
+    cacheMode
+)
+
+// BAD:
+calculateSquare(6, 19)
+
+// GOOD:
+calculateSquare(
+  x = 6,
+  y = 19
+)
+
+getCurrentUser(skipCache = false)
+setProgressBarVisible(true)
+```
+
+If there are more than 2 named arguments on one line, each argument should be moved to a new line (as in the example above).
+
+It is necessary to name all lambdas accepted by a function as arguments (except when the lambda is outside parentheses) so that the purpose and responsibility of each lambda is clear when reading the code.
+
+```kotlin
+editText.addTextChangedListener(
+    onTextChanged = { text, _, _, _ -> 
+        viewModel.onTextChanged(text?.toString())
+    },
+    afterTextChanged = { text ->
+        viewModel.onAfterTextChanged(text?.toString())
+    }
+)
+```
+
+Arguments of the same types must be named to avoid accidentally mixing them up.
+
+```kotlin
+val startDate: Date = ..
+val endDate: Date = ..
+compareDates(startDate = startDate, endDate = endDate)
+```
+
+Arguments should be named when passing `null`:
+
+```kotlin
+navigateTo(
+  screen = screenName,
+  arguments = null
+)
+```
+
+### Functional type variables
+
+It is allowed to call a lambda with either `invoke` or the shortened version `()` if there is no agreement within the project. However, explicit `invoke` has several advantages:
+
+> [!TIP]
+> One of the main reasons for using explicit `invoke` is the conceptual separation of a function as a class member and a lambda as an input parameter to a function..
+> The use of `invoke` clearly indicates that a lambda is being used, not a function.
+>
+> An additional argument for using `invoke` is its visibility. When calling a lambda without `invoke`, it can lose parentheses at the call site, which will lead to incorrect behavior.
+
+```kotlin
+@Composable
+fun CardContent(
+  header: @Composable LazyItemScope.() -> Unit,
+  body: @Composable LazyListScope.() -> Unit,
+) {
+  LazyColumn {
+    item(content = header)
+    
+    // Bad
+    body
+    // Good
+    body()
+    body.invoke(this@LazyColumn)
+  }
+}
+```
+
+### Lambda Expressions Formatting
+
+It's better to pass the method by reference:
+
+```kotlin
+ItemState(item, onItemClickListener = ::onQuestClicked)
+```
+
+When writing a lambda expression on more than one line, always use a named argument instead of `it`:
+
+```kotlin
+StateHandler(
+    state, 
+    onClickListener = { item ->
+        Log.d(..)
+        viewModel.onItemClicked(item)
+    }
+)
+```
+
+Always replace unused lambda expression parameters with the `_` character.
+
+### Composable functions
+
+Writing `Composable`-functions you should follow the [official docs][https://developer.android.com/develop/ui/compose/mental-model].
+
+Composable function should be written in `UpperCamelCase`. For example RadialSlider. All other cases described for methods and functions are applicable for `Composable`-functions too.
+
+Unless there are additional project agreements, previews for the `Composable` function are not required and may be added at the developer's discretion.
 
 ### Misc
 
@@ -199,14 +351,65 @@ data class Person(val name: String)
 
 ### Enum Classes
 
-**TODO: UPDATE FOR KOTLIN** *(This is java-only and may not be true with Kotlin)*
-
 Enum classes should be avoided where possible, due to a large memory overhead. Static constants are preferred. See http://developer.android.com/training/articles/memory.html#Overhead for further details.
 
 Enum classes without methods may be formatted without line-breaks, as follows:
 
 ```kotlin
-private enum CompassDirection { EAST, NORTH, WEST, SOUTH }
+enum class CompassDirection { EAST, NORTH, WEST, SOUTH }
+```
+
+Each enum should be *all uppercased*.
+
+### Expressions
+
+When wrapping a method call chain to a new line, the . symbol or the ?. operator are wrapped to the next line, while property is allowed to remain on one line:
+
+```kotlin
+val collectionItems = source.collectionItems
+    ?.dropLast(10)
+    ?.sortedBy { it.progress }
+```
+
+Elvis operator ?: in a multi-line expression also wraps to a new line:
+
+```kotlin
+val throwableMessage: String = throwable?.message
+    ?: DEFAULT_ERROR_MESSAGE
+
+throwable.message?.let { showError(it) }
+    ?: showError(DEFAULT_ERROR_MESSAGE)
+```
+
+If there is a multi-line lambda before the elvis operator ?:, it is advisable to move the lambda as well:
+
+__BAD:__
+
+```kotlin
+result.value?.let { message ->
+   ...
+   proceed(message)
+}
+   ?: proceed(DEFAULT_MESSAGE)
+```
+
+__GOOD:__
+
+```kotlin
+result.value
+    ?.let { message ->
+       ...
+       proceed(message)
+    }
+    ?: proceed(DEFAULT_MESSAGE)
+```
+
+When declaring a variable with a delegate that does not fit on one line, leave the declaration with the opening curly brace on one line, moving the rest of the expression to the next line:
+
+```kotlin
+private val item: Item by lazy {
+    loadItem() as Item
+}
 ```
 
 ## Spacing
@@ -257,7 +460,7 @@ val widget: CoolUiWidget =
 
 ### Line Length
 
-Lines should be no longer than 100 characters long.
+Lines should be no longer than *100 characters long*.
 
 
 ### Vertical Spacing
@@ -268,7 +471,7 @@ There should be exactly one blank line between methods to aid in visual clarity 
 
 Semicolons ~~are dead to us~~ should be avoided wherever possible in Kotlin. 
 
-__BAD__:
+__BAD:__:
 
 ```kotlin
 val horseGiftedByTrojans = true;
@@ -277,7 +480,7 @@ if (horseGiftedByTrojans) {
 }
 ```
 
-__GOOD__:
+__GOOD:__:
 
 ```kotlin
 val horseGiftedByTrojans = true
@@ -372,29 +575,71 @@ when (anInput) {
 }
 ```
 
+It is good practice to use the `when` operator to handle multiple branches without parameters, and to handle boolean values instead of `if/else`:
+
+```kotlin
+val text: String = ...
+
+when {
+  text.startsWith(PREFIX_1) -> doSomethingForCaseOne()
+  text.startsWith(PREFIX_2) -> doSomethingForCaseTwo()
+  else -> println("No case satisfied")
+}
+
+
+val isEnabled: Boolean = ...
+when (isEnabled) {
+  true -> {
+    Log.d()
+    // some multiline code 
+  }
+  false -> {
+      // ...
+  }
+}        
+
+```
+
 ## Annotations
 
-Standard annotations should be used - in particular `override`. This should appear on the same line as the function declaration.
+Annotations should be located above the description of the class/field/method to which they apply.
 
-__BAD:__
+If multiple annotations are applied to a class/field/method, place each annotation on a new line:
 
 ```kotlin
-fun onCreate(savedInstanceState: Bundle?) {
-  super.onCreate(savedInstanceState);
+@Singleton
+@Provides
+fun providesAppPrefManager(): AppPrefManager {
+    ...
 }
 ```
 
-__GOOD:__
+Annotations on arguments in a class constructor or function declaration can be written on the same line as the corresponding argument.  
+In this case, if there are several annotations for one argument, then all annotations are written on a new line, and the corresponding argument is separated from the others at the top and bottom by empty lines.
 
 ```kotlin
-override fun onCreate(savedInstanceState: Bundle?) {
-  super.onCreate(savedInstanceState);
-}
+data class UserDto (
+    @SerializedName("firstName") val firstName: String? = null,
+    @SerializedName("secondName") val secondName: String? = null
+)
+
+@Entity(tableName = "users")
+data class UserEntity (
+    @PrimaryKey val id: Int,
+    
+    @SerializedName("firstName") 
+    @ColumnInfo(name = "firstName") 
+    val firstName: String? = null,
+    
+    @SerializedName("secondName") 
+    @ColumnInfo(name = "secondName") 
+    val secondName: String? = null
+)
 ```
 
-## Types 
+## Types
 
-Always use Kotlin's native types when available. Kotlin is JVM-compatible so **[TODO: more info]**
+Always use Kotlin's native types when available. It's preferably to use Kotlin collections rather than Java-native collections. More about Kotlin Collections you can find in [official docs][https://kotlinlang.org/docs/collections-overview.html].
 
 ### Type Inference
 
@@ -422,7 +667,45 @@ Constants are defined using the `val` keyword, and variables with the `var` keyw
 
 ### Companion Objects
 
-** TODO: A bunch of stuff about companion objects **
+Object declarations and object expressions are best used for scenarios when:
+
+- *Using singletons for shared resources:* You need to ensure that only one instance of a class exists throughout the application. For example, managing a database connection pool.
+
+- *Creating factory methods:* You need a convenient way to create instances efficiently. Companion objects allow you to define class-level functions and properties tied to a class, simplifying the creation and management of these instances.
+
+- *Modifying existing class behavior temporarily:* You want to modify the behavior of an existing class without the need to create a new subclass. For example, adding temporary functionality to an object for a specific operation.
+
+- *Storing constants:* all the project constants should be stored in the respective objects to avoid using hardcoded values:
+
+
+__BAD:__
+
+```kotlin
+data class BaseResponse (
+  @SerializedName("data")  
+  val data: T?,
+    
+  @SerializedName("error")  
+  val error: String? = null
+)
+```
+
+__GOOD:__
+
+```kotlin
+object ApiFields {
+    const val data = "data"
+    const val error = "error"
+}
+
+data class BaseResponse (
+  @SerializedName(ApiFields.data)
+  val data: T?,
+
+  @SerializedName(ApiFields.error)
+  val error: String? = null
+)
+```
 
 ### Nullable Types
 
@@ -438,87 +721,122 @@ When accessing a nullable value, use the safe call operator if the value is only
 editText?.setText("foo")
 ```
 
-**TODO: Update the rest of this section from Swift**
-
-Use optional binding when it's more convenient to unwrap once and perform multiple operations:
-
-```swift
-if let textContainer = self.textContainer {
-  // do many things with textContainer
-}
-```
-
-For optional binding, shadow the original name when appropriate rather than using names like unwrappedView or actualLabel.
-
-```swift
-Preferred:
-
-var subview: UIView?
-var volume: Double?
-
-// later on...
-if let subview = subview, let volume = volume {
-  // do something with unwrapped subview and volume
-}
-```
-
-Not Preferred:
-
-```swift
-var optionalSubview: UIView?
-var volume: Double?
-
-if let unwrappedSubview = optionalSubview {
-  if let realVolume = volume {
-    // do something with unwrappedSubview and realVolume
-  }
-}
-``` 
-
-## Language
-
-Use `en-US` English spelling. 🇺🇸
+Use `orEmpty()` for collections and strings:
 
 __BAD:__
 
 ```kotlin
-val colourName = "red"
+// Bad
+nullableString ?: ""
+someList ?: emptyList()
 ```
 
 __GOOD:__
 
 ```kotlin
-colorName = "red"
+nullableString.orEmpty()
+nullableObject?.toString().orEmpty()
+someList.orEmpty {
+    // something
+}
 ```
 
-## Documentation
-Each project mast to have 2 files. README.md and CHANGELOG.md
- README.md contain all information about the project.
- CHANGELOG.md contain all changes to this project.
- 
- 
-## Distribution
+### Nullable boolean check
 
-We use [Bitrise](https://www.bitrise.io) to distribute builds to iTunesConnect.
+When checking for a nullable boolean, instead of adding `?: false` in the condition, explicitly check `boolean == true`.  
+This is one of the common [Kotlin idioms](https://kotlinlang.org/docs/idioms.html#nullable-boolean).
 
-You can distribute application with `Release` and `Staging` environment, to do it simply run from admin panel.
+__BAD:__
 
+```kotlin
+val b: Boolean? = ...
+if (boolean ?: false) {
+    ...
+} else {
+    // `b` is false or null
+}
+```
+
+__GOOD:__
+
+```kotlin
+val b: Boolean? = ...
+if (b == true) {
+    ...
+} else {
+    // `b` is false or null
+}
+```
+
+### Android Specific
+
+It is required to annotate the parameter with the `@StringRes` or `@DrawableRes` annotation and to add the `Res` suffix to the parameter name, while using the project resource reference as the function / method argument or as the class property:
+
+__BAD:__
+
+```kotlin
+@Composable
+fun CartItem(
+    title: Int,
+    icon: Int,
+    value: Double
+)
+```
+
+__GOOD:__
+
+```kotlin
+@Composable
+fun CartItem(
+  @StringRes titleRes: Int,
+  @DrawableRes iconRes: Int,
+  value: Double
+)
+```
+
+The same is applied to function names that return the resource reference:
+
+__BAD:__
+
+```kotlin
+enum class IconType { HOME, GARDEN, LIVING_ROOM }
+
+fun IconType.toIcon(): Int {
+    return when (this) {
+      HOME -> R.drawable.ic_home
+      GARDEN -> R.drawable.ic_garden
+      LIVING_ROOM -> R.drawable.ic_living_room
+    }
+}
+
+```
+
+__GOOD:__
+
+```kotlin
+enum class IconType { HOME, GARDEN, LIVING_ROOM }
+
+fun IconType.toIconRes(): Int {
+    return when (this) {
+      HOME -> R.drawable.ic_home
+      GARDEN -> R.drawable.ic_garden
+      LIVING_ROOM -> R.drawable.ic_living_room
+    }
+}
+
+```
 
 ## Localization
 
-We use [POEditor.](https://poeditor.com). It's localization management platform that's easy to use!
-
-Make sure that you have folders for each language with `Localizable.strings` files in `Resources/Localization` folder and encoding set to `UTF-16LE` in the XCode projet. After that in order to update all existings localizable strings simply from admin panel of POEditor.
-
-For right now there is no support for localizing from xibs directly, because we dont want to include meaningless strings into translation (like "Label" "Text" and etc.). 
+For application localization standard Android approach is used. 
 
 ## About Weelorum
 
-[<img src="https://www.weelorum.com/wp-content/uploads/2018/11/logo.png" alt="weelorum.com">][weelorum]
+[<img src="https://weelorum.com/wp-content/uploads/2022/05/logo.png" alt="weelorum.com">][weelorum]
 
 We specialize in providing all-in-one solution in mobile and web development. Our team follows Lean principles and works according to agile methodologies to deliver the best results reducing the budget for development and its timeline. 
 
 Find out more [here][weelorum] and don't hesitate to [contact us][contact]!
 
-[Weelorum]: https://www.weelorum.com
+[weelorum]: https://www.weelorum.com
 [contact]: https://www.weelorum.com
