@@ -152,7 +152,7 @@ val defaultTimeoutMillis
     get() = 1000L
 ```
 
-### Functions
+## Functions
 
 ### Named arguments
 
@@ -263,7 +263,7 @@ StateHandler(
 
 Always replace unused lambda expression parameters with the `_` character.
 
-### Composable functions
+## Composable functions
 
 Writing `Composable`-functions you should follow the [official docs][https://developer.android.com/develop/ui/compose/mental-model].
 
@@ -768,7 +768,7 @@ if (b == true) {
 }
 ```
 
-### Android Specific
+## Android Specific
 
 It is required to annotate the parameter with the `@StringRes` or `@DrawableRes` annotation and to add the `Res` suffix to the parameter name, while using the project resource reference as the function / method argument or as the class property:
 
