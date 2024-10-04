@@ -265,7 +265,7 @@ Always replace unused lambda expression parameters with the `_` character.
 
 ## Composable functions
 
-Writing `Composable`-functions you should follow the [official docs][https://developer.android.com/develop/ui/compose/mental-model].
+Writing `Composable`-functions you should follow the [official docs](https://developer.android.com/develop/ui/compose/mental-model).
 
 Composable function should be written in `UpperCamelCase`. For example RadialSlider. All other cases described for methods and functions are applicable for `Composable`-functions too.
 
@@ -639,7 +639,7 @@ data class UserEntity (
 
 ## Types
 
-Always use Kotlin's native types when available. It's preferably to use Kotlin collections rather than Java-native collections. More about Kotlin Collections you can find in [official docs][https://kotlinlang.org/docs/collections-overview.html].
+Always use Kotlin's native types when available. It's preferably to use Kotlin collections rather than Java-native collections. More about Kotlin Collections you can find in [official docs](https://kotlinlang.org/docs/collections-overview.html).
 
 ### Type Inference
 
