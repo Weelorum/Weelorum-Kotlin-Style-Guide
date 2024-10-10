@@ -3,8 +3,8 @@
 You should also check out our other style guides too:
 
 * [Swift](https://github.com/Weelorum/Weelorum-Swift-Style-Guide)
-* [Flutter](https://github.com/Weelorum/Weelorum-Swift-Style-GuideWeelorum-Flutter-Style-Guide)
-* [Objective-C](https://github.com/Weelorum/Weelorum-Objective-C-Style-Guide)
+* [Flutter](https://github.com/Weelorum/Weelorum-Flutter-Style-Guide)
+* [About Weelorum](#about-weelorum)
 
 ## Inspiration
 
@@ -832,11 +832,12 @@ For application localization standard Android approach is used.
 
 ## About Weelorum
 
-[<img src="https://weelorum.com/wp-content/uploads/2022/05/logo.png" alt="weelorum.com">][weelorum]
+[<img src="https://www.weelorum.com/wp-content/uploads/2018/11/logo.png" alt="www.weelorum.com">][weelorum]
 
-We specialize in providing all-in-one solution in mobile and web development. Our team follows Lean principles and works according to agile methodologies to deliver the best results reducing the budget for development and its timeline. 
+NEWPROJECT are maintained by Weelorum. We specialize in providing all-in-one solution in mobile and web development. Our team follows Lean principles and works according to agile methodologies to deliver the best results reducing the budget for development and its timeline. 
 
 Find out more [here][weelorum] and don't hesitate to [contact us][contact]!
 
 [weelorum]: https://www.weelorum.com
-[contact]: https://www.weelorum.com
+[contact]: https://weelorum.com/contact/
+
