@@ -2,18 +2,19 @@
 
 You should also check out our other style guides too:
 
-* [Swift](https://github.com/Weelorum/Weelorum-Swift-Style-Guide)
-* [Flutter](https://github.com/Weelorum/Weelorum-Flutter-Style-Guide)
-* [About Weelorum](#about-weelorum)
+-   [Swift](https://github.com/Weelorum/Weelorum-Swift-Style-Guide)
+-   [Flutter](https://github.com/Weelorum/Weelorum-Flutter-Style-Guide)
+-   [About Weelorum](#about-weelorum)
+-   [Weelorum Blog](https://weelorum.com/blog/)
 
 ## Inspiration
 
-The language guidance is drawn from: 
+The language guidance is drawn from:
 
-- The [Android Kotlin style guide](https://android.github.io/kotlin-guides/style.html)
-- The [Kotlin Coding Conventions](https://kotlinlang.org/docs/reference/coding-conventions.html) 
-- The [Android contributors style guide](https://source.android.com/source/code-style.html)
-- The [Google Java Style Guide](https://google-styleguide.googlecode.com/svn/trunk/javaguide.html).
+-   The [Android Kotlin style guide](https://android.github.io/kotlin-guides/style.html)
+-   The [Kotlin Coding Conventions](https://kotlinlang.org/docs/reference/coding-conventions.html)
+-   The [Android contributors style guide](https://source.android.com/source/code-style.html)
+-   The [Google Java Style Guide](https://google-styleguide.googlecode.com/svn/trunk/javaguide.html).
 
 ## Android Studio Coding Style
 
@@ -25,48 +26,48 @@ To install the file, open Android Studio Settings and go to **Editor > Code Styl
 
 From now on, projects you create _should_ follow the correct style guidelines.
 
-
 ## Table of Contents
 
-- [Nomenclature](#nomenclature)
-  + [Packages](#packages)
-  + [Classes & Interfaces](#classes--interfaces)
-  + [Methods](#methods)
-  + [Fields](#fields)
-  + [Variables & Parameters](#variables--parameters)
-  + [Misc](#misc)
-- [Declarations](#declarations)
-  + [Visibility Modifiers](#visibility-modifiers)
-  + [Fields & Variables](#fields--variables)
-  + [Classes](#classes)
-  + [Data Type Objects](#data-type-objects)
-  + [Enum Classes](#enum-classes)
-  + [Expressions](#expressions)
-- [Spacing](#spacing)
-  + [Indentation](#indentation)
-  + [Line Length](#line-length)
-  + [Vertical Spacing](#vertical-spacing)
-- [Semicolons](#semicolons)
-- [Getters & Setters](#getters--setters)
-- [Brace Style](#brace-style)
-- [When Statements](#when-statements)
-- [Functions](#functions)
-  + [Named arguments](#named-arguments)
-  + [Functional type variables](#functional-type-variables)
-  + [Lambda Expressions Formatting](#lambda-expressions-formatting)
-  + [Composable functions](#composable-functions)
-- [Annotations](#annotations)
-- [Types](#types)
-  + [Type Inference](#type-inference)
-  + [Constants vs. Variables](#constants-vs-variables)
-  + [Companion Objects](#companion-objects)
-  + [Nullable type](#nullable-types)
-  + [Nullable boolean check](#nullable-boolean-check)
-- [Android Specific](#android-specific)
-* [Localization](#localization)
-* [About Weelorum](#about-weelorum)
+-   [Nomenclature](#nomenclature)
+    -   [Packages](#packages)
+    -   [Classes & Interfaces](#classes--interfaces)
+    -   [Methods](#methods)
+    -   [Fields](#fields)
+    -   [Variables & Parameters](#variables--parameters)
+    -   [Misc](#misc)
+-   [Declarations](#declarations)
+    -   [Visibility Modifiers](#visibility-modifiers)
+    -   [Fields & Variables](#fields--variables)
+    -   [Classes](#classes)
+    -   [Data Type Objects](#data-type-objects)
+    -   [Enum Classes](#enum-classes)
+    -   [Expressions](#expressions)
+-   [Spacing](#spacing)
+    -   [Indentation](#indentation)
+    -   [Line Length](#line-length)
+    -   [Vertical Spacing](#vertical-spacing)
+-   [Semicolons](#semicolons)
+-   [Getters & Setters](#getters--setters)
+-   [Brace Style](#brace-style)
+-   [When Statements](#when-statements)
+-   [Functions](#functions)
+    -   [Named arguments](#named-arguments)
+    -   [Functional type variables](#functional-type-variables)
+    -   [Lambda Expressions Formatting](#lambda-expressions-formatting)
+    -   [Composable functions](#composable-functions)
+-   [Annotations](#annotations)
+-   [Types](#types)
+    -   [Type Inference](#type-inference)
+    -   [Constants vs. Variables](#constants-vs-variables)
+    -   [Companion Objects](#companion-objects)
+    -   [Nullable type](#nullable-types)
+    -   [Nullable boolean check](#nullable-boolean-check)
+-   [Android Specific](#android-specific)
 
+*   [Localization](#localization)
+*   [About Weelorum](#about-weelorum)
 
+-   [Code Examples](#code-examples)
 
 ## Nomenclature
 
@@ -74,15 +75,15 @@ On the whole, naming should follow Java standards, as Kotlin is a JVM-compatible
 
 ### Packages
 
-Package names are similar to Java: all __lower-case__, multiple words concatenated together, without hypens or underscores:
+Package names are similar to Java: all **lower-case**, multiple words concatenated together, without hypens or underscores:
 
-__BAD__:
+**BAD**:
 
 ```kotlin
 com.Weelorum.name_project
 ```
 
-__GOOD__:
+**GOOD**:
 
 ```kotlin
 com.weelorum.nameproject
@@ -90,15 +91,15 @@ com.weelorum.nameproject
 
 ### Classes & Interfaces
 
-Written in __UpperCamelCase__. For example `RadialSlider`. 
+Written in **UpperCamelCase**. For example `RadialSlider`.
 
 ### Methods
 
-Written in __lowerCamelCase__. For example `setValue`.
+Written in **lowerCamelCase**. For example `setValue`.
 
 ### Fields
 
-Generally, written in __lowerCamelCase__. Fields should **not** be named with Hungarian notation, as Hungarian notation is [erroneously thought](http://jakewharton.com/just-say-no-to-hungarian-notation/) to be recommended by Google.
+Generally, written in **lowerCamelCase**. Fields should **not** be named with Hungarian notation, as Hungarian notation is [erroneously thought](http://jakewharton.com/just-say-no-to-hungarian-notation/) to be recommended by Google.
 
 Example field names:
 
@@ -110,7 +111,7 @@ class MyClass {
 }
 ```
 
-Constant values in the companion object should be written in __uppercase__, with an underscore separating words:
+Constant values in the companion object should be written in **uppercase**, with an underscore separating words:
 
 ```kotlin
 companion object {
@@ -120,13 +121,13 @@ companion object {
 
 ### Variables & Parameters
 
-Written in __lowerCamelCase__.
+Written in **lowerCamelCase**.
 
 Single character values must be avoided, except for temporary looping variables.
 
 When declaring constants, fields or function arguments, it is recommended to additionally specify the dimension if the context or name of the function does not provide an unambiguous understanding of their purpose:
 
-__BAD:__
+**BAD:**
 
 ```kotlin
 const val TIMEOUT = 1000L
@@ -137,7 +138,7 @@ fun someFunction(timeout: Long)
 val defaultTimeout get() = 1000L
 ```
 
-__GOOD:__
+**GOOD:**
 
 ```kotlin
 const val TIMEOUT_MILLIS = 1000L
@@ -187,7 +188,7 @@ It is necessary to name all lambdas accepted by a function as arguments (except 
 
 ```kotlin
 editText.addTextChangedListener(
-    onTextChanged = { text, _, _, _ -> 
+    onTextChanged = { text, _, _, _ ->
         viewModel.onTextChanged(text?.toString())
     },
     afterTextChanged = { text ->
@@ -231,7 +232,7 @@ fun CardContent(
 ) {
   LazyColumn {
     item(content = header)
-    
+
     // Bad
     body
     // Good
@@ -253,7 +254,7 @@ When writing a lambda expression on more than one line, always use a named argum
 
 ```kotlin
 StateHandler(
-    state, 
+    state,
     onClickListener = { item ->
         Log.d(..)
         viewModel.onItemClicked(item)
@@ -275,14 +276,15 @@ Unless there are additional project agreements, previews for the `Composable` fu
 
 In code, acronyms should be treated as words. For example:
 
-__BAD:__
+**BAD:**
 
 ```kotlin
 XMLHTTPRequest
-URL: String? 
+URL: String?
 findPostByID
 ```
-__GOOD:__
+
+**GOOD:**
 
 ```kotlin
 XmlHttpRequest
@@ -303,7 +305,7 @@ public val wideOpenProperty = 1
 private val myOwnPrivateProperty = "private"
 ```
 
-**GOOD:***
+**GOOD:\***
 
 ```kotlin
 val wideOpenProperty = 1
@@ -318,7 +320,7 @@ Access level modifiers should be explicitly defined for classes, methods and mem
 
 Prefer single declaration per line.
 
-__GOOD:__
+**GOOD:**
 
 ```kotlin
 username: String
@@ -333,7 +335,7 @@ Exactly one class per source file, although inner classes are encouraged where s
 
 Prefer data classes for simple data holding objects.
 
-__BAD:__
+**BAD:**
 
 ```kotlin
 class Person(val name: String) {
@@ -343,7 +345,7 @@ class Person(val name: String) {
 }
 ```
 
-__GOOD:__
+**GOOD:**
 
 ```kotlin
 data class Person(val name: String)
@@ -359,7 +361,7 @@ Enum classes without methods may be formatted without line-breaks, as follows:
 enum class CompassDirection { EAST, NORTH, WEST, SOUTH }
 ```
 
-Each enum should be *all uppercased*.
+Each enum should be _all uppercased_.
 
 ### Expressions
 
@@ -383,7 +385,7 @@ throwable.message?.let { showError(it) }
 
 If there is a multi-line lambda before the elvis operator ?:, it is advisable to move the lambda as well:
 
-__BAD:__
+**BAD:**
 
 ```kotlin
 result.value?.let { message ->
@@ -393,7 +395,7 @@ result.value?.let { message ->
    ?: proceed(DEFAULT_MESSAGE)
 ```
 
-__GOOD:__
+**GOOD:**
 
 ```kotlin
 result.value
@@ -414,7 +416,7 @@ private val item: Item by lazy {
 
 ## Spacing
 
-Spacing is especially important, as code needs to be easily readable as part of the tutorial. 
+Spacing is especially important, as code needs to be easily readable as part of the tutorial.
 
 ### Indentation
 
@@ -424,7 +426,7 @@ Indentation is using spaces - never tabs.
 
 Indentation for blocks uses 2 spaces (not the default 4):
 
-__BAD:__
+**BAD:**
 
 ```kotlin
 for (i in 0..9) {
@@ -432,7 +434,7 @@ for (i in 0..9) {
 }
 ```
 
-__GOOD:__
+**GOOD:**
 
 ```kotlin
 for (i in 0..9) {
@@ -444,14 +446,14 @@ for (i in 0..9) {
 
 Indentation for line wraps should use 4 spaces (not the default 8):
 
-__BAD:__
+**BAD:**
 
 ```kotlin
 val widget: CoolUiWidget =
         someIncrediblyLongExpression(that, reallyWouldNotFit, on, aSingle, line)
 ```
 
-__GOOD:__
+**GOOD:**
 
 ```kotlin
 val widget: CoolUiWidget =
@@ -460,8 +462,7 @@ val widget: CoolUiWidget =
 
 ### Line Length
 
-Lines should be no longer than *100 characters long*.
-
+Lines should be no longer than _100 characters long_.
 
 ### Vertical Spacing
 
@@ -469,9 +470,9 @@ There should be exactly one blank line between methods to aid in visual clarity 
 
 ## Semicolons
 
-Semicolons ~~are dead to us~~ should be avoided wherever possible in Kotlin. 
+Semicolons ~~are dead to us~~ should be avoided wherever possible in Kotlin.
 
-__BAD:__:
+**BAD:**:
 
 ```kotlin
 val horseGiftedByTrojans = true;
@@ -480,7 +481,7 @@ if (horseGiftedByTrojans) {
 }
 ```
 
-__GOOD:__:
+**GOOD:**:
 
 ```kotlin
 val horseGiftedByTrojans = true
@@ -491,7 +492,7 @@ if (horseGiftedByTrojans) {
 
 ## Getters & Setters
 
-Unlike Java, direct access to fields in Kotlin is preferred. 
+Unlike Java, direct access to fields in Kotlin is preferred.
 
 If custom getters and setters are required, they should be declared [following Kotlin conventions](https://kotlinlang.org/docs/reference/properties.html) rather than as separate methods.
 
@@ -499,7 +500,7 @@ If custom getters and setters are required, they should be declared [following K
 
 Only trailing closing-braces are awarded their own line. All others appear the same line as preceding code:
 
-__BAD:__
+**BAD:**
 
 ```kotlin
 class MyClass
@@ -518,7 +519,7 @@ class MyClass
 }
 ```
 
-__GOOD:__
+**GOOD:**
 
 ```kotlin
 class MyClass {
@@ -534,7 +535,7 @@ class MyClass {
 
 Conditional statements are always required to be enclosed with braces, irrespective of the number of lines required.
 
-__BAD:__
+**BAD:**
 
 ```kotlin
 if (someTest)
@@ -542,7 +543,7 @@ if (someTest)
 if (someTest) doSomethingElse()
 ```
 
-__GOOD:__
+**GOOD:**
 
 ```kotlin
 if (someTest) {
@@ -555,7 +556,7 @@ if (someTest) { doSomethingElse() }
 
 Unlike `switch` statements in Java, `when` statements do not fall through. Separate cases using commas if they should be handled the same way. Always include the else case.
 
-__BAD:__
+**BAD:**
 
 ```kotlin
 when (anInput) {
@@ -565,7 +566,7 @@ when (anInput) {
 }
 ```
 
-__GOOD:__
+**GOOD:**
 
 ```kotlin
 when (anInput) {
@@ -591,12 +592,12 @@ val isEnabled: Boolean = ...
 when (isEnabled) {
   true -> {
     Log.d()
-    // some multiline code 
+    // some multiline code
   }
   false -> {
       // ...
   }
-}        
+}
 
 ```
 
@@ -626,13 +627,13 @@ data class UserDto (
 @Entity(tableName = "users")
 data class UserEntity (
     @PrimaryKey val id: Int,
-    
-    @SerializedName("firstName") 
-    @ColumnInfo(name = "firstName") 
+
+    @SerializedName("firstName")
+    @ColumnInfo(name = "firstName")
     val firstName: String? = null,
-    
-    @SerializedName("secondName") 
-    @ColumnInfo(name = "secondName") 
+
+    @SerializedName("secondName")
+    @ColumnInfo(name = "secondName")
     val secondName: String? = null
 )
 ```
@@ -643,54 +644,53 @@ Always use Kotlin's native types when available. It's preferably to use Kotlin c
 
 ### Type Inference
 
-Type inference should be preferred where possible to explicitly declared types. 
+Type inference should be preferred where possible to explicitly declared types.
 
-__BAD:__
+**BAD:**
 
 ```kotlin
 val something: MyType = MyType()
 val meaningOfLife: Int = 42
 ```
 
-__GOOD:__
+**GOOD:**
 
 ```kotlin
 val something = MyType()
 val meaningOfLife = 42
 ```
 
-### Constants vs. Variables 
+### Constants vs. Variables
 
 Constants are defined using the `val` keyword, and variables with the `var` keyword. Always use `val` instead of `var` if the value of the variable will not change.
 
-*Tip*: A good technique is to define everything using `val` and only change it to `var` if the compiler complains!
+_Tip_: A good technique is to define everything using `val` and only change it to `var` if the compiler complains!
 
 ### Companion Objects
 
 Object declarations and object expressions are best used for scenarios when:
 
-- *Using singletons for shared resources:* You need to ensure that only one instance of a class exists throughout the application. For example, managing a database connection pool.
+-   _Using singletons for shared resources:_ You need to ensure that only one instance of a class exists throughout the application. For example, managing a database connection pool.
 
-- *Creating factory methods:* You need a convenient way to create instances efficiently. Companion objects allow you to define class-level functions and properties tied to a class, simplifying the creation and management of these instances.
+-   _Creating factory methods:_ You need a convenient way to create instances efficiently. Companion objects allow you to define class-level functions and properties tied to a class, simplifying the creation and management of these instances.
 
-- *Modifying existing class behavior temporarily:* You want to modify the behavior of an existing class without the need to create a new subclass. For example, adding temporary functionality to an object for a specific operation.
+-   _Modifying existing class behavior temporarily:_ You want to modify the behavior of an existing class without the need to create a new subclass. For example, adding temporary functionality to an object for a specific operation.
 
-- *Storing constants:* all the project constants should be stored in the respective objects to avoid using hardcoded values:
+-   _Storing constants:_ all the project constants should be stored in the respective objects to avoid using hardcoded values:
 
-
-__BAD:__
+**BAD:**
 
 ```kotlin
 data class BaseResponse (
-  @SerializedName("data")  
+  @SerializedName("data")
   val data: T?,
-    
-  @SerializedName("error")  
+
+  @SerializedName("error")
   val error: String? = null
 )
 ```
 
-__GOOD:__
+**GOOD:**
 
 ```kotlin
 object ApiFields {
@@ -723,7 +723,7 @@ editText?.setText("foo")
 
 Use `orEmpty()` for collections and strings:
 
-__BAD:__
+**BAD:**
 
 ```kotlin
 // Bad
@@ -731,7 +731,7 @@ nullableString ?: ""
 someList ?: emptyList()
 ```
 
-__GOOD:__
+**GOOD:**
 
 ```kotlin
 nullableString.orEmpty()
@@ -746,7 +746,7 @@ someList.orEmpty {
 When checking for a nullable boolean, instead of adding `?: false` in the condition, explicitly check `boolean == true`.  
 This is one of the common [Kotlin idioms](https://kotlinlang.org/docs/idioms.html#nullable-boolean).
 
-__BAD:__
+**BAD:**
 
 ```kotlin
 val b: Boolean? = ...
@@ -757,7 +757,7 @@ if (boolean ?: false) {
 }
 ```
 
-__GOOD:__
+**GOOD:**
 
 ```kotlin
 val b: Boolean? = ...
@@ -772,7 +772,7 @@ if (b == true) {
 
 It is required to annotate the parameter with the `@StringRes` or `@DrawableRes` annotation and to add the `Res` suffix to the parameter name, while using the project resource reference as the function / method argument or as the class property:
 
-__BAD:__
+**BAD:**
 
 ```kotlin
 @Composable
@@ -783,7 +783,7 @@ fun CartItem(
 )
 ```
 
-__GOOD:__
+**GOOD:**
 
 ```kotlin
 @Composable
@@ -796,7 +796,7 @@ fun CartItem(
 
 The same is applied to function names that return the resource reference:
 
-__BAD:__
+**BAD:**
 
 ```kotlin
 enum class IconType { HOME, GARDEN, LIVING_ROOM }
@@ -811,7 +811,7 @@ fun IconType.toIcon(): Int {
 
 ```
 
-__GOOD:__
+**GOOD:**
 
 ```kotlin
 enum class IconType { HOME, GARDEN, LIVING_ROOM }
@@ -828,16 +828,20 @@ fun IconType.toIconRes(): Int {
 
 ## Localization
 
-For application localization standard Android approach is used. 
+For application localization standard Android approach is used.
+
+## Code Examples
+
+You can find practical code examples in the [code-examples](./code-examples) folder. These examples illustrate recommended patterns and best practices for Kotlin development in our company.
 
 ## About Weelorum
 
-[<img src="https://www.weelorum.com/wp-content/uploads/2018/11/logo.png" alt="www.weelorum.com">][weelorum]
+[<img src="https://weelorum.com/wp-content/uploads/2022/05/logo.png" alt="www.weelorum.com">][weelorum]
 
-NEWPROJECT are maintained by Weelorum. We specialize in providing all-in-one solution in mobile and web development. Our team follows Lean principles and works according to agile methodologies to deliver the best results reducing the budget for development and its timeline. 
+NEWPROJECT are maintained by Weelorum. We specialize in providing all-in-one solution in mobile and web development. Our team follows Lean principles and works according to agile methodologies to deliver the best results reducing the budget for development and its timeline.
 
-Find out more [here][weelorum] and don't hesitate to [contact us][contact]!
+Find out more [here][weelorum], read our [blog][weelorum_blog], and don't hesitate to [contact us][contact]!
 
-[weelorum]: https://www.weelorum.com
+[weelorum]: https://www.weelorum.com/
+[weelorum_blog]: https://weelorum.com/blog/
 [contact]: https://weelorum.com/contact/
-
