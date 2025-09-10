@@ -26,20 +26,15 @@ internal class EmailRegistrationViewModel @Inject constructor(
     private val credentialContract: CredentialContract
 ) : BaseViewModel<State, Action>(), EventHandler<Event> {
 
-    private val stateLock = Object()
     override val initialState: State
         get() = State.Content()
 
     private fun getContentState(): State.Content {
-        synchronized(stateLock) {
-            return state.value as State.Content
-        }
+        return state.value as State.Content
     }
 
     private fun updateState(newState: State.Content) {
-        synchronized(stateLock) {
-            setState(newState)
-        }
+        setState(newState)
     }
 
     override fun obtainEvent(event: Event) {
@@ -66,12 +61,12 @@ internal class EmailRegistrationViewModel @Inject constructor(
 
     private fun reduceSetEditMode(isEditMode: Boolean) {
         viewModelScope.launch {
-            updateState(
-                State.Content(
-                    isEditMode = isEditMode,
-                    email = appPrefManager.email
-                )
+        updateState(
+            State.Content(
+                isEditMode = isEditMode,
+                email = appPrefManager.email
             )
+        )
         }
     }
 
@@ -93,28 +88,26 @@ internal class EmailRegistrationViewModel @Inject constructor(
 
     private fun reduceEmailChange(value: String) {
         viewModelScope.launch {
-            updateState(
-                getContentState().copy(
-                    email = value,
-                    emailError = fieldValidator.emailIsValid(value)
-                )
+        updateState(
+            getContentState().copy(
+                email = value,
+                emailError = fieldValidator.emailIsValid(value)
             )
+        )
         }
     }
 
     private fun reduceContinueClick() {
         if (getContentState().hasError().not()) {
             viewModelScope.launch {
-                updateState(
-                    getContentState().copy(isLoading = true)
-                )
+        updateState(
+            getContentState().copy(isLoading = true)
+        )
                 appPrefManager.email = getContentState().email
 
                 if (getContentState().isEditMode) {
                     val request = withContext(coroutineDispatcher.io) {
-                        userUseCase.updateUser(
-                            email = getContentState().email
-                        )
+                        userUseCase.updateUser(email = getContentState().email)
                     }
 
                     if (request.hasError().not()) {
@@ -124,15 +117,15 @@ internal class EmailRegistrationViewModel @Inject constructor(
                     }
                 } else {
                     val request = withContext(coroutineDispatcher.io) {
-                        authUseCase.startRegistration(getContentState().email)
+                        authUseCase.startRegistration(email = getContentState().email)
                     }
 
                     val result = request.value
 
                     if (request.success == true && result != null) {
                         credentialContract.invoke(
-                            result,
-                            this@EmailRegistrationViewModel::handleResult
+                            credentialResult = result,
+                            resultCallback = this@EmailRegistrationViewModel::handleResult
                         )
                     } else {
                         setAction(
@@ -149,7 +142,7 @@ internal class EmailRegistrationViewModel @Inject constructor(
             when (credentialResult) {
                 is CredentialResult.Success -> {
                     val request = withContext(coroutineDispatcher.io) {
-                        authUseCase.finishRegistration(credentialResult.responseJson)
+                        authUseCase.finishRegistration(responseJson = credentialResult.responseJson)
                     }
 
                     if (request.hasError()) {

@@ -28,8 +28,8 @@ import com.example.resources.common.Dimens.GRID_4
 import com.example.resources.common.Dimens.GRID_6
 import com.example.resources.common.Dimens.GRID_8
 import com.example.resources.extensions.setBarsColor
-import com.example.resources.themes.ExampleTheme
 import com.example.resources.themes.AppTheme
+import com.example.resources.themes.ExampleTheme
 import com.example.resources.widgets.AppBars.AppBarCenteredTitle
 import com.example.resources.widgets.Buttons.DefaultButton
 import com.example.resources.widgets.Cards.TermsWidget
@@ -105,10 +105,10 @@ internal fun EmailRegistrationComponent(
             SpacerVerticalView(GRID_12)
 
             if (isEditMode.not()) {
-                ScreenTitle(
-                    title = title,
-                    subTitle = stringResource(id = R.string.registration_screen_subtitle)
-                )
+            ScreenTitle(
+                title = title,
+                subTitle = stringResource(id = R.string.registration_screen_subtitle)
+            )
 
                 SpacerVerticalView(GRID_20)
             }

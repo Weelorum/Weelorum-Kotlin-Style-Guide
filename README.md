@@ -63,11 +63,9 @@ From now on, projects you create _should_ follow the correct style guidelines.
     -   [Nullable type](#nullable-types)
     -   [Nullable boolean check](#nullable-boolean-check)
 -   [Android Specific](#android-specific)
-
-*   [Localization](#localization)
-*   [About Weelorum](#about-weelorum)
-
+-   [Localization](#localization)
 -   [Code Examples](#code-examples)
+-   [About Weelorum](#about-weelorum)
 
 ## Nomenclature
 
@@ -75,7 +73,7 @@ On the whole, naming should follow Java standards, as Kotlin is a JVM-compatible
 
 ### Packages
 
-Package names are similar to Java: all **lower-case**, multiple words concatenated together, without hypens or underscores:
+Package names are similar to Java: all **lower-case**, multiple words concatenated together, without hyphens or underscores:
 
 **BAD**:
 
@@ -219,7 +217,7 @@ navigateTo(
 It is allowed to call a lambda with either `invoke` or the shortened version `()` if there is no agreement within the project. However, explicit `invoke` has several advantages:
 
 > [!TIP]
-> One of the main reasons for using explicit `invoke` is the conceptual separation of a function as a class member and a lambda as an input parameter to a function..
+> One of the main reasons for using explicit `invoke` is the conceptual separation of a function as a class member and a lambda as an input parameter to a function.
 > The use of `invoke` clearly indicates that a lambda is being used, not a function.
 >
 > An additional argument for using `invoke` is its visibility. When calling a lambda without `invoke`, it can lose parentheses at the call site, which will lead to incorrect behavior.
@@ -750,7 +748,7 @@ This is one of the common [Kotlin idioms](https://kotlinlang.org/docs/idioms.htm
 
 ```kotlin
 val b: Boolean? = ...
-if (boolean ?: false) {
+if (b ?: false) {
     ...
 } else {
     // `b` is false or null
